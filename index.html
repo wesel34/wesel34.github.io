@@ -3,187 +3,304 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Crislandy - Mi Amor</title>
+    <title>Cryslandy - Mi Universo Completo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Montserrat:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body {
+        :root {
+            --color-principal: #ff4d6d;
+            --color-secundario: #ff8fa3;
+            --degradado: linear-gradient(135deg, #ff4d6d 0%, #ff8fa3 100%);
+        }
+
+        * {
             margin: 0;
             padding: 0;
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background: var(--degradado);
             min-height: 100vh;
             overflow-x: hidden;
+            color: #2b2d42;
         }
 
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 2rem;
         }
 
         header {
             text-align: center;
-            padding: 50px 0;
-            animation: fadeIn 2s ease-in;
+            padding: 4rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            position: relative;
+            z-index: 2;
         }
 
         h1 {
-            color: #ff0066;
-            font-size: 4em;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
-            margin-bottom: 20px;
-            position: relative;
-        }
-
-        h1::after {
-            content: '❤️';
-            position: absolute;
+            font-family: 'Dancing Script', cursive;
+            font-size: clamp(3rem, 10vw, 5rem);
+            color: white;
+            text-shadow: 3px 3px 6px rgba(0,0,0,0.2);
+            margin-bottom: 1rem;
             animation: float 3s ease-in-out infinite;
         }
 
-        .corazon {
-            position: fixed;
-            font-size: 24px;
-            opacity: 0;
-            animation: hearts 3s linear infinite;
+        .subtitulo {
+            font-size: 1.25rem;
+            color: rgba(255,255,255,0.9);
+            letter-spacing: 2px;
         }
 
-        .mensaje {
-            background: rgba(255, 255, 255, 0.9);
-            padding: 30px;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255, 105, 180, 0.3);
-            margin: 20px 0;
-            transform: rotate(-2deg);
-            animation: slideIn 1.5s ease-out;
+        .corazon-flotante {
+            position: absolute;
+            font-size: 2rem;
+            animation: hearts 5s linear infinite;
+            opacity: 0;
+            z-index: 1;
+        }
+
+        .mensaje-amor {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin: 2rem 0;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: perspective(1000px) rotateX(5deg);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease;
+        }
+
+        .mensaje-amor:hover {
+            transform: perspective(1000px) rotateX(0deg);
+        }
+
+        .mensaje-amor::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255,255,255,0.3), transparent);
+            animation: brillo 4s infinite;
         }
 
         .galeria {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 20%));
-            gap: 220px;
-            margin-top: 40px;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin: 3rem 0;
         }
 
-        .foto {
-            border-radius: 20px;
+        .foto-container {
+            border-radius: 15px;
             overflow: hidden;
-            transition: transform 0.3s ease;
             position: relative;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            aspect-ratio: 1;
         }
 
-        .foto:hover {
-            transform: scale(1.05) rotate(2deg);
+        .foto-container:hover {
+            transform: translateY(-5px) scale(1.03);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
         }
 
-        .foto img {
+        .foto-container img {
             width: 100%;
-            height: 300px;
+            height: 100%;
             object-fit: cover;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(100px) rotate(-5deg); opacity: 0; }
-            to { transform: translateY(0) rotate(-2deg); opacity: 1; }
-        }
-
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-20px); }
-            100% { transform: translateY(0px); }
-        }
-
-        @keyframes hearts {
-            0% { opacity: 0; transform: translateY(0); }
-            20% { opacity: 1; }
-            100% { opacity: 0; transform: translateY(-100vh); }
+            transition: transform 0.3s ease;
         }
 
         .boton-amor {
-            background: #ff69b4;
+            background: var(--color-principal);
             color: white;
-            padding: 15px 30px;
+            padding: 1rem 2.5rem;
             border: none;
-            border-radius: 25px;
-            font-size: 1.2em;
+            border-radius: 50px;
+            font-size: 1.1rem;
             cursor: pointer;
             transition: all 0.3s ease;
-            display: block;
-            margin: 30px auto;
-            box-shadow: 0 4px 15px rgba(255,105,180,0.4);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 2rem auto;
+            box-shadow: 0 5px 15px rgba(255,77,109,0.4);
         }
 
         .boton-amor:hover {
-            transform: scale(1.1);
-            background: #ff1493;
+            background: var(--color-secundario);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(255,77,109,0.6);
         }
 
+        .boton-amor i {
+            font-size: 1.3rem;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+
+        @keyframes hearts {
+            0% { opacity: 0; transform: translateY(0) scale(0.5); }
+            20% { opacity: 1; transform: translateY(-20px) scale(1); }
+            100% { opacity: 0; transform: translateY(-100vh) scale(1.5); }
+        }
+
+        @keyframes brillo {
+            0% { transform: rotate(45deg) translate(-50%, -50%); }
+            100% { transform: rotate(45deg) translate(150%, 150%); }
+        }
+
+        .flores-decoracion {
+            position: fixed;
+            pointer-events: none;
+            opacity: 0.1;
+            z-index: 0;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+            
+            .mensaje-amor {
+                padding: 1.5rem;
+            }
+        }
+
+        .toast-mensaje {
+            position: fixed;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: rgba(255,255,255,0.95);
+            padding: 1rem 2rem;
+            border-radius: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: toast 3s ease;
+            display: none;
+        }
+
+        @keyframes toast {
+            0% { bottom: -100px; opacity: 0; }
+            20% { bottom: 2rem; opacity: 1; }
+            80% { bottom: 2rem; opacity: 1; }
+            100% { bottom: -100px; opacity: 0; }
+        }
     </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body>
     <div class="container">
         <header>
-            <h1>Crislandy 🌸</h1>
-            <p class="subtitulo">La mujer más hermosa del universo</p>
+            <div class="header-content">
+                <h1>Cryslandy 🌸</h1>
+                <p class="subtitulo">Eres el latido de mi corazón</p>
+            </div>
         </header>
 
         <main>
-            <div class="mensaje">
-                <h2>Por que te amo 💖</h2>
-                <p>Te amo Crislandy por tu increíble capacidad para iluminar cada momento con tu alegría contagiosa y tu corazón generoso. tu bondad y autenticidad son un refugio en los días difíciles para mí, y tu sonrisa tiene el poder de transformar cualquier oscuridad en esperanza. Admiro tu fuerza para enfrentar desafíos con determinación y tu pasión por vivir cada día con propósito. tu compañía me hace sentir comprendido y valorado, como si en su presencia el tiempo se detuviera para recordarme lo que realmente importa. Crislandy no solo has llegado a ser alguien especial en mi vida, sino un motivo constante para creer en el amor, la amistad y la belleza de las pequeñas cosas. Cada detalle, cada gesto y cada conversación con Tigo refuerza lo afortunado que soy de tenerlo a mi lado.❤️</p>
+            <div class="mensaje-amor">
+                <h2 style="color: var(--color-principal); margin-bottom: 1.5rem;">Mi Amor Eterno</h2>
+                <p style="line-height: 1.8; font-size: 1.1rem;">
+                    Te amo Crislandy por tu increíble capacidad para iluminar cada momento con tu alegría contagiosa y tu corazón generoso. tu bondad y autenticidad son un refugio en los días difíciles para mí, y tu sonrisa tiene el poder de transformar cualquier oscuridad en esperanza. Admiro tu fuerza para enfrentar desafíos con determinación y tu pasión por vivir cada día con propósito. tu compañía me hace sentir comprendido y valorado, como si en su presencia el tiempo se detuviera para recordarme lo que realmente importa. Crislandy no solo has llegado a ser alguien especial en mi vida, sino un motivo constante para creer en el amor, la amistad y la belleza de las pequeñas cosas. Cada detalle, cada gesto y cada conversación con Tigo refuerza lo afortunado que soy de tenerlo a mi lado.❤️
+                    <br><br>
+                    Admiro tu fuerza, tu pasión por la vida y esa bondad que irradias a cada persona a tu alrededor. Eres mi confidente, mi cómplice y mi mayor inspiración. Cada día a tu lado es un regalo que atesoro con el alma.
+                    <br><br>
+                    Este espacio es solo un pequeño reflejo de todo lo que siento por ti. Eres mi complemento perfecto, mi amor verdadero, mi TODO. Te amo hoy, mañana y siempre. 💞
+                </p>
             </div>
 
-            <button class="boton-amor">¡Haz clic para más amor!</button>
+            <button class="boton-amor" id="btnAmor">
+                <i class="fas fa-heart"></i>
+                Más Razones
+            </button>
 
             <div class="galeria">
-                <!-- Puedes agregar tus propias fotos aquí -->
-                <div class="foto">
-                    <img src="1.jpg" alt="Nuestra Foto 1">
+                <div class="foto-container">
+                    <img src="1.jpg" alt="Nuestra primera aventura">
                 </div>
-                <div class="foto">
-                    <img src="2.jpg" alt="Nuestra Foto 1">
+                
+
+                <div class="foto-container">
+                    <img src="11.jpg" alt="Momentos inolvidables"> 
+                </div> 
+                
+
+
+                <div class="foto-container">
+                    <img src="12.jpg" alt="Amor verdadero">
                 </div>
-                <div class="foto">
-                    <img src="3.jpg" alt="Nuestra Foto 1">
-                </div>
+                
+                
             </div>
+            <p><h1>Cada sonrisa tulla es como ver lo mas hermoso en mundo.</h1></p>
+            <p><h1>Seguire viendo como mejoras y te superas a mi lado.</h1></p>
+            <p><h1>Cada dia que paso a tu lado aprendo lo que es amar con el corazon.</h1></p>
+
+
+            <div class="toast-mensaje" id="toast"></div>
         </main>
     </div>
 
     <script>
-        document.querySelector('.boton-amor').addEventListener('click', function() {
-            const mensajesAmor = [
-                "Eres mi sol en días nublados",
-                "Tu sonrisa ilumina mi vida",
-                "Eres perfecta tal como eres",
-                "Mi corazón late por ti",
-                "Eres mi sueño hecho realidad",
-                "Juntos somos invencibles"
-            ];
+        const mensajesAmor = [
+            "Eres mi sueño hecho realidad",
+            "Tu amor me hace mejor persona",
+            "Cada día te amo más",
+            "Eres mi lugar seguro",
+            "Tu sonrisa es mi felicidad",
+            "Contigo el tiempo vuela",
+            "Eres mi razón de ser",
+            "Nuestro amor es infinito"
+        ];
+
+        document.getElementById('btnAmor').addEventListener('click', function() {
+            const toast = document.getElementById('toast');
+            const mensaje = mensajesAmor[Math.floor(Math.random() * mensajesAmor.length)];
             
-            const randomIndex = Math.floor(Math.random() * mensajesAmor.length);
-            alert(mensajesAmor[randomIndex]);
+            toast.textContent = mensaje;
+            toast.style.display = 'block';
+            
+            setTimeout(() => {
+                toast.style.display = 'none';
+            }, 3000);
         });
 
-        // Crear corazones animados
         function crearCorazon() {
             const corazon = document.createElement('div');
-            corazon.className = 'corazon';
+            corazon.className = 'corazon-flotante';
             corazon.innerHTML = '❤️';
             corazon.style.left = Math.random() * 100 + 'vw';
             corazon.style.animationDuration = Math.random() * 3 + 2 + 's';
+            corazon.style.fontSize = Math.random() * 30 + 20 + 'px';
             document.body.appendChild(corazon);
 
-            setTimeout(() => {
-                corazon.remove();
-            }, 5000);
+            setTimeout(() => corazon.remove(), 5000);
         }
 
-        setInterval(crearCorazon, 300);
+        setInterval(crearCorazon, 500);
+
+        // Efecto parallax suave
+        window.addEventListener('mousemove', (e) => {
+            const x = (e.clientX / window.innerWidth - 0.5) * 20;
+            const y = (e.clientY / window.innerHeight - 0.5) * 20;
+            document.querySelector('header').style.transform = `translate(${x}px, ${y}px)`;
+        });
     </script>
 </body>
 </html>
